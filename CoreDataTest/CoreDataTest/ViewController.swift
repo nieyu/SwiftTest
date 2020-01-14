@@ -18,10 +18,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createSqlite()
+
+        SSCoreDataManager.shareInstance.databaseName = "Person"
+        let model = Person()
+        model.name = "张三"
+        model.age = 16
+        SSCoreDataManager.shareInstance.insert(model: model)
+        let p: [Person] = SSCoreDataManager.shareInstance.query(model: model) ?? [Person]()
+        print(p.count)
+        
     }
 
     private func createSqlite() {
+                
         guard let personPath = Bundle.main.path(forResource: "Person", ofType: "momd") else {
             print("没有找到资源")
             return
@@ -65,7 +74,7 @@ class ViewController: UIViewController {
         let person: Person = NSEntityDescription.insertNewObject(forEntityName: "Person", into: context) as! Person
         person.id = "9527"
         person.age = Int16(arc4random() % 20)
-        person.name = "yunie"
+        person.name = "yunie\(person.age)"
         person.sex = true
         
         let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
@@ -82,11 +91,51 @@ class ViewController: UIViewController {
     }
     
     @IBAction func deleteAA(_ sender: UIButton) {
-        
+        let deleteRequest: NSFetchRequest<Person> = Person.fetchRequest()
+        let predicate: NSPredicate = NSPredicate.init(format: "age < %d", 10)
+        deleteRequest.predicate = predicate
+        do {
+            let _deleteArray = try _context?.fetch(deleteRequest)
+            if let deleteArray = _deleteArray {
+                deleteArray.forEach { (item) in
+                    _context?.delete(item)
+                }
+            }
+            
+            let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
+            if let result = try _context?.fetch(fetchRequest) {
+                _dataSource = result
+                tableView.reloadData()
+            }
+            
+        } catch {
+            print("deleteAA request error \(error.localizedDescription)")
+        }
     }
     
     @IBAction func change(_ sender: UIButton) {
+        let changeRequest: NSFetchRequest<Person> = Person.fetchRequest()
+        let predicate: NSPredicate = NSPredicate.init(format: "age < %d", 10)
+        changeRequest.predicate = predicate
         
+        do {
+            let result = try _context?.fetch(changeRequest)
+            if let _result = result {
+                _result.forEach { (person) in
+                    person.age += 1
+                }
+            }
+            try _context?.save()
+            
+            let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
+            if let result = try _context?.fetch(fetchRequest) {
+                _dataSource = result
+                tableView.reloadData()
+            }
+            
+        } catch {
+            print("change request error \(error.localizedDescription)")
+        }
     }
     
     @IBAction func query(_ sender: UIButton) {

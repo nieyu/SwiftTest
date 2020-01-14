@@ -24,3 +24,14 @@ extension Person {
     @NSManaged public var feets: Int16
 
 }
+
+extension Person: SSCoreDataFetchProtocol {
+    public func fetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
+        return NSFetchRequest<Person>(entityName: "Person") as! NSFetchRequest<NSFetchRequestResult>
+    }
+    
+}
+
+public protocol SSCoreDataFetchProtocol {
+    func fetchRequest() -> NSFetchRequest<NSFetchRequestResult>
+}

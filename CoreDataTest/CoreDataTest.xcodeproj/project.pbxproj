@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		515F4F0523CDC66800DEF077 /* SSCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515F4F0423CDC66800DEF077 /* SSCoreDataManager.swift */; };
 		5185267B23C7396100BBD8CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5185267A23C7396100BBD8CB /* AppDelegate.swift */; };
 		5185267D23C7396100BBD8CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5185267C23C7396100BBD8CB /* SceneDelegate.swift */; };
 		5185267F23C7396100BBD8CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5185267E23C7396100BBD8CB /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		515F4F0423CDC66800DEF077 /* SSCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSCoreDataManager.swift; sourceTree = "<group>"; };
 		5185267723C7396100BBD8CB /* CoreDataTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5185267A23C7396100BBD8CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5185267C23C7396100BBD8CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				5185267A23C7396100BBD8CB /* AppDelegate.swift */,
 				5185267C23C7396100BBD8CB /* SceneDelegate.swift */,
 				5185267E23C7396100BBD8CB /* ViewController.swift */,
+				515F4F0423CDC66800DEF077 /* SSCoreDataManager.swift */,
 				518AA12523CC92D000E9BA73 /* MyTableViewCell.swift */,
 				5185269123C7399D00BBD8CB /* Person.xcdatamodeld */,
 				5185268023C7396100BBD8CB /* Main.storyboard */,
@@ -157,6 +160,7 @@
 				5185269E23C749ED00BBD8CB /* Person+CoreDataClass.swift in Sources */,
 				5185267B23C7396100BBD8CB /* AppDelegate.swift in Sources */,
 				5185269323C7399D00BBD8CB /* Person.xcdatamodeld in Sources */,
+				515F4F0523CDC66800DEF077 /* SSCoreDataManager.swift in Sources */,
 				5185267D23C7396100BBD8CB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
