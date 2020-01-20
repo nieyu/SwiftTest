@@ -25,13 +25,9 @@ extension Person {
 
 }
 
-extension Person: SSCoreDataFetchProtocol {
-    public func fetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
-        return NSFetchRequest<Person>(entityName: "Person") as! NSFetchRequest<NSFetchRequestResult>
-    }
-    
-}
-
-public protocol SSCoreDataFetchProtocol {
-    func fetchRequest() -> NSFetchRequest<NSFetchRequestResult>
-}
+//extension Person: SSCoreDataFetchProtocol {}
+//
+//public protocol SSCoreDataFetchProtocol: NSFetchRequestResult {
+//    var name: String? { get }
+//    static func fetchRequest() -> NSFetchRequest<NSFetchRequestResult>
+//}

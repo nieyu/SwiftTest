@@ -18,15 +18,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+        createSqlite()
+//        SSCoreDataManager.shareInstance.databaseName = "Person"
+//        var model = NSEntityDescription.insertNewObject(forEntityName: "Person", into: SSCoreDataManager.shareInstance.context) as! Person
+//        model.name = "张三"
+//        model.age = 16
+//        SSCoreDataManager.shareInstance.insert(model: model)
+//        let p: [Person] = SSCoreDataManager.shareInstance.query(model: model) ?? [Person]()
+//        print(p.count)
 
-        SSCoreDataManager.shareInstance.databaseName = "Person"
-        let model = Person()
-        model.name = "张三"
-        model.age = 16
-        SSCoreDataManager.shareInstance.insert(model: model)
-        let p: [Person] = SSCoreDataManager.shareInstance.query(model: model) ?? [Person]()
-        print(p.count)
-        
     }
 
     private func createSqlite() {
@@ -74,8 +75,9 @@ class ViewController: UIViewController {
         let person: Person = NSEntityDescription.insertNewObject(forEntityName: "Person", into: context) as! Person
         person.id = "9527"
         person.age = Int16(arc4random() % 20)
-        person.name = "yunie\(person.age)"
+        person.name = "yunie" + "\(person.age)"
         person.sex = true
+        
         
         let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
         do {
@@ -88,11 +90,26 @@ class ViewController: UIViewController {
             print("insert fetchRequest error\(error.localizedDescription)")
         }
         
+        //        let results = SSCoreDataManager.shareInstance.insert(model: person)
+        //        self._dataSource = results!
+        //        self.tableView.reloadData()
+        
     }
     
     @IBAction func deleteAA(_ sender: UIButton) {
+        
+//        let model = Person.init(context: SSCoreDataManager.shareInstance.context)
+//        model.name = "yunie"
+//        SSCoreDataManager.shareInstance.delete(model: model)
+//        let p: [Person] = SSCoreDataManager.shareInstance.query(model: Person.self) ?? [Person]()
+//        self._dataSource = p
+//        self.tableView.reloadData()
+//        print(p.count)
+        //BEGINSWITH
+        //CONTAINS
+        //ENDSWITH
         let deleteRequest: NSFetchRequest<Person> = Person.fetchRequest()
-        let predicate: NSPredicate = NSPredicate.init(format: "age < %d", 10)
+        let predicate: NSPredicate = NSPredicate.init(format: "name CONTAINS %@", "nie")
         deleteRequest.predicate = predicate
         do {
             let _deleteArray = try _context?.fetch(deleteRequest)
@@ -100,14 +117,15 @@ class ViewController: UIViewController {
                 deleteArray.forEach { (item) in
                     _context?.delete(item)
                 }
+                try _context?.save()
             }
-            
+
             let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
             if let result = try _context?.fetch(fetchRequest) {
                 _dataSource = result
                 tableView.reloadData()
             }
-            
+
         } catch {
             print("deleteAA request error \(error.localizedDescription)")
         }
@@ -139,6 +157,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func query(_ sender: UIButton) {
+//        let result = SSCoreDataManager.shareInstance.query(model: Person.self)
+//        _dataSource = result!
+//        tableView.reloadData()
         let fetchRequest: NSFetchRequest<Person> = Person.fetchRequest()
         do {
             if let result = try _context?.fetch(fetchRequest) {
@@ -169,7 +190,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
 }
